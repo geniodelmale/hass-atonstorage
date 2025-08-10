@@ -499,6 +499,7 @@ def _create_entities(hass: HomeAssistant, entry: dict):
             ):
                 entities.append(
                     AtonStorageIntegrationSensor(
+                        hass,
                         integration_method="left",
                         name=f"{username} {entity_description.name}",
                         round_digits=2,
@@ -599,6 +600,7 @@ class AtonStorageIntegrationSensor(IntegrationSensor):
 
     def __init__(
         self,
+        hass, # Home Assistant 2025.8+: IntegrationSensor requires hass
         *,
         integration_method: str,
         name: str | None,
@@ -614,6 +616,7 @@ class AtonStorageIntegrationSensor(IntegrationSensor):
     ) -> None:
         """Initialize the integration sensor."""
         super().__init__(
+            hass, # Home Assistant 2025.8+: IntegrationSensor requires hass
             integration_method=integration_method,
             name=name,
             round_digits=round_digits,
